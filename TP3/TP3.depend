@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1624054147 source:c:\users\usuario\desktop\test tp3\tp3\controller.c
+	<stdio.h>
+	<stdlib.h>
+	"Controller.h"
+	"LinkedList.h"
+	"Employee.h"
+
+1624054090 c:\users\usuario\desktop\test tp3\tp3\controller.h
+	"parser.h"
+	"Employee.h"
+	"utn.h"
+
+1624054386 c:\users\usuario\desktop\test tp3\tp3\parser.h
+	"LinkedList.h"
+
+1624054342 c:\users\usuario\desktop\test tp3\tp3\linkedlist.h
+
+1624054240 c:\users\usuario\desktop\test tp3\tp3\employee.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1624054477 c:\users\usuario\desktop\test tp3\tp3\utn.h
+
+1624054283 source:c:\users\usuario\desktop\test tp3\tp3\employee.c
+	"Employee.h"
+
+1624053089 source:c:\users\usuario\desktop\test tp3\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+	"utn.h"
+
+1624054434 source:c:\users\usuario\desktop\test tp3\tp3\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1624054515 source:c:\users\usuario\desktop\test tp3\tp3\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1624210709 source:c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\controller.c
+	<stdio.h>
+	<stdlib.h>
+	"Controller.h"
+	"LinkedList.h"
+	"Employee.h"
+
+1624211291 c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\controller.h
+	"parser.h"
+	"Employee.h"
+	"utn.h"
+
+1624054386 c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\parser.h
+	"LinkedList.h"
+
+1624054342 c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\linkedlist.h
+
+1624211509 c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\employee.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1624054477 c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\utn.h
+
+1624054283 source:c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\employee.c
+	"Employee.h"
+
+1624211539 source:c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+	"utn.h"
+
+1624210799 source:c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1624054515 source:c:\users\usuario\desktop\utn\programacion 1\ejercicios\tps\tp_laboratorio_1\tp3\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
