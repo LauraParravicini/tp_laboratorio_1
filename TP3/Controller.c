@@ -74,6 +74,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee,int* pId)
 
                     printf("\n- Employee added :) -\n");
                     ll_add(pArrayListEmployee,nuevo);
+                    pArrayListEmployee->size++;
                 }else{
                     free(nuevo);
                     printf("\n-- Assigning Error--\n");
@@ -133,6 +134,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     int idIngresado;
     int indiceExiste = -1;
+    int status = 0;
     Employee* aux = NULL;
     char nombre[128];
     int sueldo;
@@ -141,11 +143,11 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	int retorno = -1;
 	if(pArrayListEmployee != NULL){
 
-		utn_getNumero(&idIngresado," - Enter Employee ID to edit: ","-!- Invalid ID -!-",0,20000,10);
+		status = utn_getNumero(&idIngresado," - Enter Employee ID to edit: ","-!- Invalid ID -!-",0,20000,10);
 
         aux = controller_searchEmployeeID(pArrayListEmployee,idIngresado,&indiceExiste);
 
-		if(indiceExiste >= 0){
+		if(indiceExiste >= 0 && status){
 			printf("\n     --Editing--\n   ID     Name        Hours Salary\n");
 
             controller_showEmployee(aux);
@@ -190,16 +192,17 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
     int idIngresado;
     int indiceExiste = -1;
+    int status = 0;
     Employee* aux = NULL;
     char confirmacion;
 	int retorno = -1;
 	if(pArrayListEmployee != NULL){
 
-		utn_getNumero(&idIngresado," - Enter Employee ID to remove: ","-!- Invalid ID -!-",0,20000,10);
+        status = utn_getNumero(&idIngresado," - Enter Employee ID to remove: ","-!- Invalid ID -!-",0,20000,10);
 
         aux = controller_searchEmployeeID(pArrayListEmployee,idIngresado,&indiceExiste);
 
-		if(indiceExiste >= 0){
+		if(indiceExiste >= 0 && status){
 			printf("\n     -- Employee to remove --\n   ID     Name        Hours Salary\n");
 
             controller_showEmployee(aux);
@@ -270,9 +273,55 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    ll_sort(pArrayListEmployee,employeeCompareNombre, 1);
+    int status = 0;
+    int opcion;
+    int orden;
+    status = utn_getNumero(&opcion,"\n\t 1) Order by Name \n\t 2) Order by ID \n\t 3) Order by Worked Hours \n\t 4) Order by salary \n\t 5) Back \n -- Enter order option:","-!- Invalid option -!-\n",1,5,10);
 
-    return 1;
+    if(status){
+        switch(opcion){
+            case 1:
+                status = utn_getNumero(&orden,"\n -- Value Order \n\t 1) Ascendant \n\t 2) Descendant \n -- Enter value order option: ","-!- Invalid option -!-\n",1,2,10);
+                printf("-- Loading.... --\n");
+                if(orden == 2){ orden = 0; }
+                if( !ll_sort(pArrayListEmployee,employeeCompareNombre, orden) ){
+                    printf(" -- List ordered --\n\n");
+                    status = 1;
+                }
+                break;
+            case 2:
+                status = utn_getNumero(&orden,"\n -- Value Order \n\t 1) Ascendant \n\t 2) Descendant \n -- Enter value order option: ","-!- Invalid option -!-\n",1,2,10);
+                printf("-- Loading.... --\n");
+                if(orden == 2){ orden = 0; }
+                if( !ll_sort(pArrayListEmployee,employeeCompareID, orden) ){
+                    printf(" -- List ordered --\n\n");
+                    status = 1;
+                }
+                break;
+            case 3:
+                status = utn_getNumero(&orden,"\n -- Value Order \n\t 1) Ascendant \n\t 2) Descendant \n -- Enter value order option: ","-!- Invalid option -!-\n",1,2,10);
+                printf("-- Loading.... --\n");
+                if(orden == 2){ orden = 0; }
+                if( !ll_sort(pArrayListEmployee,employeeCompareHoras, orden) ){
+                    printf(" -- List ordered --\n\n");
+                    status = 1;
+                }
+                break;
+            case 4:
+                status = utn_getNumero(&orden,"\n -- Value Order \n\t 1) Ascendant \n\t 2) Descendant \n -- Enter value order option: ","-!- Invalid option -!-\n",1,2,10);
+                printf("-- Loading.... --\n");
+                if(orden == 2){ orden = 0; }
+                if( !ll_sort(pArrayListEmployee,employeeCompareSueldo, orden) ){
+                    printf(" -- List ordered --\n\n");
+                    status = 1;
+                }
+                break;
+            case 5:
+                break;
+        }
+    }
+
+    return status;
 }
 
 // --- Sort
@@ -280,17 +329,88 @@ int employeeCompareNombre(void* a,void* b){
     int status = 0;
     Employee* emp1 = NULL;
     Employee* emp2 = NULL;
+    char nombre1[20];
+    char nombre2[20];
     if(a != NULL && b != NULL){
         //Casteo lo que estaba en void a empleado
         emp1 = (Employee*) a;
         emp2 = (Employee*) b;
+        strcpy(nombre1,emp1->nombre);
+        strcpy(nombre2,emp2->nombre);
+        strlwr(nombre1);
+        strlwr(nombre2);
         // retorno = emp1->legajo - emp2->legajo , asi devuelvo de la funcion cuando da positivo y negativo
-        status = strcmp(emp1->nombre,emp2->nombre);
+        status = strcmp(nombre1,nombre2);
     }
 
     return status;
 }
 
+// --- Sort
+int employeeCompareID(void* a,void* b){
+    int status = 0;
+    Employee* emp1 = NULL;
+    Employee* emp2 = NULL;
+    if(a != NULL && b != NULL){
+        //Casteo lo que estaba en void a empleado
+        emp1 = (Employee*) a;
+        emp2 = (Employee*) b;
+        status = emp1->id - emp2->id;
+        if(status > 0){
+            status = 1;
+        }else if(status < 0){
+            status = -1;
+        }else{
+            status = 0;
+        }
+    }
+
+    return status;
+}
+
+// --- Sort
+int employeeCompareHoras(void* a,void* b){
+    int status = 0;
+    Employee* emp1 = NULL;
+    Employee* emp2 = NULL;
+    if(a != NULL && b != NULL){
+        //Casteo lo que estaba en void a empleado
+        emp1 = (Employee*) a;
+        emp2 = (Employee*) b;
+        status = emp1->horasTrabajadas - emp2->horasTrabajadas;
+        if(status > 0){
+            status = 1;
+        }else if(status < 0){
+            status = -1;
+        }else{
+            status = 0;
+        }
+    }
+
+    return status;
+}
+
+// --- Sort
+int employeeCompareSueldo(void* a,void* b){
+    int status = 0;
+    Employee* emp1 = NULL;
+    Employee* emp2 = NULL;
+    if(a != NULL && b != NULL){
+        //Casteo lo que estaba en void a empleado
+        emp1 = (Employee*) a;
+        emp2 = (Employee*) b;
+        status = emp1->sueldo - emp2->sueldo;
+        if(status > 0){
+            status = 1;
+        }else if(status < 0){
+            status = -1;
+        }else{
+            status = 0;
+        }
+    }
+
+    return status;
+}
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -405,4 +525,3 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 
     return 1;
 }
-

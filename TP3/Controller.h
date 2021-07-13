@@ -91,6 +91,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee);
  */
 int employeeCompareNombre(void* a,void* b);
 
+int employeeCompareID(void* a,void* b);
+int employeeCompareHoras(void* a,void* b);
+int employeeCompareSueldo(void* a,void* b);
+
 /** \brief Saves in text format the data present in the actual linked list
  *
  * \param path char*
